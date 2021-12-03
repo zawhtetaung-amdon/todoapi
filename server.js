@@ -11,7 +11,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(function (req, res, next) {
   // Website you wish to allow to connect
-  res.setHeader("Access-Control-Allow-Origin", "*");
+  res.setHeader("Access-Control-Allow-Origin", "https://zawhtetaung-amdon.github.io/todoapp/");
 
   // Request methods you wish to allow
   res.setHeader("Access-Control-Allow-Methods", "GET, POST, OPTIONS, PUT, PATCH, DELETE");
@@ -56,6 +56,6 @@ app.get("/", (req, res) => {
 require("./app/routes/note.routes.js")(app);
 
 // listen for requests
-app.listen(3000, () => {
+app.listen(process.env.PORT || 5000, () => {
   console.log("Server is listening on port 3000");
 });
