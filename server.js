@@ -54,8 +54,9 @@ app.get("/", (req, res) => {
 });
 // Require Notes routes
 require("./app/routes/note.routes.js")(app);
+require("./app/routes/user.routes.js")(app);
 
 // listen for requests
-app.listen(process.env.PORT || 5000, () => {
+app.listen(process.env.PORT || 3000, () => {
   console.log("Server is listening on port 3000");
 });

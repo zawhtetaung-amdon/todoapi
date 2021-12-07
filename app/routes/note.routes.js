@@ -1,19 +1,21 @@
+import { checkAuth } from "../middlewares/auth.middleware";
+
 module.exports = (app) => {
   const notes = require("../controllers/note.controller.js");
 
   // Create a new Note
-  app.post("/notes", notes.create);
+  app.post("/notes", checkAuth, notes.create);
 
   // Retrieve all Notes
-  app.get("/notes", notes.findAll);
+  app.get("/notes", checkAuth, notes.findAll);
 
   // Retrieve a single Note with noteId
-  app.get("/notes/:noteId", notes.findOne);
+  app.get("/notes/:noteId", checkAuth, notes.findOne);
 
   // Update a Note with noteId
-  app.put("/notes/:noteId", notes.update);
-  app.put("/notes-update/:noteId", notes.updatewhole);
+  app.put("/notes/:noteId", checkAuth, notes.update);
+  app.put("/notes-update/:noteId", checkAuth, notes.updatewhole);
 
   // Delete a Note with noteId
-  app.delete("/notes/:noteId", notes.delete);
+  app.delete("/notes/:noteId", checkAuth, notes.delete);
 };

@@ -5,7 +5,7 @@
   "main": "(index.js) server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server.js"
+    "start": "node -r esm server.js"
   },
   "keywords": [
     "Express",
@@ -17,8 +17,12 @@
   "author": "zhared",
   "license": "ISC",
   "dependencies": {
+    "bcrypt": "^5.0.1",
     "body-parser": "^1.19.0",
+    "esm": "^3.2.25",
     "express": "^4.17.1",
+    "glob": "^7.2.0",
+    "jsonwebtoken": "^8.5.1",
     "mongoose": "^6.0.13"
   }
 }
