@@ -1,5 +1,6 @@
 const express = require("express");
 const bodyParser = require("body-parser");
+import cors from "cors";
 
 // create express app
 const app = express();
@@ -9,23 +10,16 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 // parse requests of content-type - application/json
 app.use(bodyParser.json());
-app.use(function (req, res, next) {
-  // Website you wish to allow to connect
-  res.setHeader("Access-Control-Allow-Origin", "*");
-
-  // Request methods you wish to allow
-  res.setHeader("Access-Control-Allow-Methods", "GET, POST, OPTIONS, PUT, PATCH, DELETE");
-
-  // Request headers you wish to allow
-  res.setHeader("Access-Control-Allow-Headers", "AUTHORIZATION", "X-Requested-With,Content-Type");
-
-  // Set to true if you need the website to include cookies in the requests sent
-  // to the API (e.g. in case you use sessions)
-  res.setHeader("Access-Control-Allow-Credentials", true);
-
-  // Pass to next layer of middleware
-  next();
-});
+app.use(
+  cors({
+    origin: (origin, callback) => {
+      return callback(null, true);
+    },
+    optionsSuccessStatus: 200,
+    credentials: true,
+    exposedHeaders: "*",
+  })
+);
 
 // Configuring the database
 const dbConfig = require("./config/database.config.js");
