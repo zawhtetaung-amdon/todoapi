@@ -48,7 +48,7 @@ exports.create = (req, res) => {
 // Retrieve and return all notes from the database.
 exports.findAll = (req, res) => {
   Note.find({
-    userId: ObjectId(req.body.userId),
+    userId: ObjectId(req.query.userId),
   })
     .then((notes) => {
       res.send(notes);
