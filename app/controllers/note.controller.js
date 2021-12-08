@@ -131,7 +131,7 @@ exports.update = (req, res) => {
 exports.delete = (req, res) => {
   Note.findOneAndRemove({
     _id: ObjectId(req.params.noteId),
-    userId: ObjectId(req.body.userId),
+    userId: ObjectId(req.params.userId),
   })
     .then((note) => {
       if (!note) {

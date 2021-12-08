@@ -17,5 +17,5 @@ module.exports = (app) => {
   app.put("/notes-update/:noteId", checkAuth, notes.updatewhole);
 
   // Delete a Note with noteId
-  app.delete("/notes/:noteId", checkAuth, notes.delete);
+  app.delete("/notes/:noteId/:userId", checkAuth, notes.delete);
 };
