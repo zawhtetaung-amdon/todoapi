@@ -45,5 +45,6 @@ exports.login = async (req, res) => {
   });
   res.send({
     token: token,
+    userId: user._id,
   });
 };
