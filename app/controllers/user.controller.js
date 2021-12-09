@@ -56,3 +56,16 @@ exports.login = async (req, res) => {
     userId: user._id,
   });
 };
+
+exports.detail = async (req, res) => {
+  console.log("detail log");
+  const user = await User.findOne({ userId: req.params.userId });
+  if (!user) {
+    return res.status(400).send({
+      message: "No User Found",
+    });
+  }
+  res.send({
+    userDetail: user,
+  });
+};
