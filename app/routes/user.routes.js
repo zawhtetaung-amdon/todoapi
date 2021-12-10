@@ -7,7 +7,7 @@ module.exports = (app) => {
 
   app.post("/users/login", users.login);
 
-  app.post("/users/edit/:userId", checkAuth, users.edit);
+  app.put("/users/edit/:userId", checkAuth, users.edit);
 
   app.get("/users/detail/:userId", checkAuth, users.detail);
 };
