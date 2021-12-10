@@ -78,3 +78,46 @@ exports.detail = async (req, res) => {
     });
   }
 };
+
+exports.edit = async (req, res) => {
+  if (!req.body.name) {
+    return res.status(400).send({
+      message: "User name empty",
+    });
+  }
+  try {
+    User.findOneAndUpdate(
+      {
+        _id: ObjectId(req.params.userId),
+      },
+      {
+        name: req.body.name || "Untitled Note",
+        password: req.body.password,
+        email: req.body.email,
+      },
+      { new: true }
+    )
+      .then((user) => {
+        if (!user) {
+          return res.status(404).send({
+            message: "User not found with id " + req.params.userId,
+          });
+        }
+        res.send(user);
+      })
+      .catch((err) => {
+        if (err.kind === "ObjectId") {
+          return res.status(404).send({
+            message: "User not found with id " + req.params.userId,
+          });
+        }
+        return res.status(500).send({
+          message: "Error updating user with id " + req.params.userId,
+        });
+      });
+  } catch (error) {
+    res.status(400).send({
+      message: error.message || "Something Wrong",
+    });
+  }
+};
