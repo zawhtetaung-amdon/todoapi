@@ -86,6 +86,14 @@ exports.edit = async (req, res) => {
     });
   }
   try {
+    const oldUser = await User.findOne({
+      _id: ObjectId(req.params.userId),
+    });
+    if (!oldUser) {
+      return res.status(400).send({
+        message: "Not found user",
+      });
+    }
     User.findOneAndUpdate(
       {
         _id: ObjectId(req.params.userId),
@@ -94,6 +102,7 @@ exports.edit = async (req, res) => {
         name: req.body.name || "Untitled Note",
         password: req.body.password,
         email: req.body.email,
+        profileImg: req.file.path || oldUser.profileImg,
       },
       { new: true }
     )
