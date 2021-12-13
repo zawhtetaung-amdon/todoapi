@@ -178,7 +178,7 @@ exports.updatewhole = (req, res) => {
     .then((note) => {
       if (!note) {
         return res.status(404).send({
-          message: "Note not found with id " + req.params.noteId,
+          message: "Note not found with id test" + req.params.noteId,
         });
       }
       res.send(note);
